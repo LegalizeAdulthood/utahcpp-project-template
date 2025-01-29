@@ -11,6 +11,8 @@ include(CTest)
 
 add_executable(project-template main.cpp)
 
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT project-template)
+
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
