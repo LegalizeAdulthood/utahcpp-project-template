@@ -24,7 +24,7 @@ endif()
 
 misc_target(FILES
     "CMakePresets.json"
-    "ReadMe.md"
+    "ReadMe.md")
 misc_group_sources("CMake Scripts" FILES
     "cmake/misc_target.cmake"
     "cmake/set_cxx_standard.cmake"
