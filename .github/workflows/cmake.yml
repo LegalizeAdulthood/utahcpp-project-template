@@ -30,11 +30,17 @@ jobs:
         submodules: true
 
     - name: Install Prerequisites Linux
-      if: ${{matrix.os != 'windows-latest'}}
+      if: ${{matrix.os == 'ubuntu-latest'}}
       shell: bash
       run: |
         ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
         sudo apt install mono-complete
+
+    - name: Install Prerequisites macOS
+      if: ${{matrix.os == 'macos-latest'}}
+      shell: bash
+      run: |
+        ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
 
     - name: Add NuGet sources
       shell: bash
