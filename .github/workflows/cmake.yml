@@ -30,7 +30,7 @@ jobs:
         submodules: true
 
     - name: Install Prerequisites Linux
-      if: ${{matrix.os == 'ubuntu-latest' && matrix.os != 'foo')}}
+      if: ${{matrix.os == 'ubuntu-latest' && matrix.os != 'foo'}}
       shell: bash
       run: |
         ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
