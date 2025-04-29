@@ -37,13 +37,13 @@ jobs:
         sudo apt install mono-complete
 
     - name: Install Prerequisites macOS
-      if: ${{matrix.os == 'macos-latest' && secrets.GH_PACKAGES_TOKEN != ''}}
+      if: ${{matrix.os == 'macos-latest'}}
       shell: bash
       run: |
         ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
 
     - name: Add NuGet sources
-      if: ${{secrets.GH_PACKAGES_TOKEN != ''}}
+      if: ${{matrix.os == 'macos-latest'}}
       shell: bash
       run: |
         ${{matrix.nuget}} \
