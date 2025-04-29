@@ -41,6 +41,7 @@ jobs:
       shell: bash
       run: |
         ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
+        mono --version
 
     - name: Add NuGet sources
       if: ${{matrix.os != 'macos-latest'}}
