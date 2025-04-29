@@ -30,7 +30,7 @@ jobs:
         submodules: true
 
     - name: Install Prerequisites Linux
-      if: ${{matrix.os == 'ubuntu-latest' && matrix.os != 'foo'}}
+      if: ${{matrix.os == 'ubuntu-latest'}}
       shell: bash
       run: |
         ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
@@ -43,7 +43,7 @@ jobs:
         ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
 
     - name: Add NuGet sources
-      if: ${{matrix.os == 'macos-latest'}}
+      if: ${{matrix.os != 'macos-latest'}}
       shell: bash
       run: |
         ${{matrix.nuget}} \
