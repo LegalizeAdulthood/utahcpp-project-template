@@ -10,8 +10,8 @@ Use git to clone this repository, then update the vcpkg submodule to bootstrap
 the dependency process.
 
 ```
-git clone https://github.com/LegalizeAdulthood/utah-cpp-project-template
-cd utah-cpp-project-template
+git clone https://github.com/LegalizeAdulthood/utahcpp-project-template
+cd utahcpp-project-template
 git submodule init
 git submodule update --depth 1
 ```
