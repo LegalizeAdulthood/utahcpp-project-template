@@ -1,5 +1,8 @@
 name: CMake
 
+permissions:
+  packages: write
+
 on:
   push:
     branches: [ "master" ]
