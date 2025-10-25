@@ -35,9 +35,13 @@ jobs:
     - name: Install Prerequisites Linux
       if: ${{matrix.os == 'ubuntu-latest'}}
       shell: bash
+      env:
+        DEBIAN_FRONTEND: noninteractive
       run: |
         ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
-        sudo apt install mono-complete
+        echo "man-db man-db/auto-update boolean false" | sudo debconf-set-selections
+        sudo dpkg-reconfigure man-db
+        sudo apt install --no-install-recommends -y mono-complete
 
     - name: Install Prerequisites macOS
       if: ${{matrix.os == 'macos-latest'}}
