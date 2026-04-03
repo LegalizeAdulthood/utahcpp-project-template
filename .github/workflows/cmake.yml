@@ -39,8 +39,6 @@ jobs:
         cmake-version: '3.31'
 
     - name: Run Workflow
-      env: 
-        VCPKG_BINARY_SOURCES: "clear;nuget,${{env.FEED_URL}},readwrite"
       run: |
         cmake --version
         cmake --workflow --preset default
