@@ -14,17 +14,6 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        include:
-          - os: macos-latest
-            nuget: mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
-          - os: ubuntu-latest
-            nuget: mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
-          - os: windows-latest
-            nuget: nuget
-
-    runs-on: ${{matrix.os}}
-    env: 
-      FEED_URL: https://nuget.pkg.github.com/${{github.repository_owner}}/index.json
 
     steps:
     - name: Checkout
@@ -32,37 +21,15 @@ jobs:
       with:
         submodules: true
 
-    - name: Install Prerequisites Linux
-      if: ${{matrix.os == 'ubuntu-latest'}}
-      shell: bash
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
-        echo "man-db man-db/auto-update boolean false" | sudo debconf-set-selections
-        sudo dpkg-reconfigure man-db
-        sudo apt install --no-install-recommends -y mono-complete
-
-    - name: Install Prerequisites macOS
-      if: ${{matrix.os == 'macos-latest'}}
-      shell: bash
-      run: |
-        brew install mono
-        ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
-
-    - name: Add NuGet sources
-      shell: bash
-      run: |
-        ${{matrix.nuget}} \
-          sources add \
-          -Source "${{env.FEED_URL}}" \
-          -StorePasswordInClearText \
-          -Name GitHubPackages \
-          -UserName "${{github.repository_owner}}" \
-          -Password "${{secrets.GITHUB_TOKEN}}"
-        ${{matrix.nuget}} \
-          setapikey "${{secrets.GITHUB_TOKEN}}" \
-          -Source "${{env.FEED_URL}}"
+    #- name: Install Prerequisites Linux
+    #  if: ${{matrix.os == 'ubuntu-latest'}}
+    #  shell: bash
+    #  env:
+    #    DEBIAN_FRONTEND: noninteractive
+    #  run: |
+    #    ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
+    #    echo "man-db man-db/auto-update boolean false" | sudo debconf-set-selections
+    #    sudo dpkg-reconfigure man-db
 
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@0d6a7d60b009d01c9e7523be22153ff8f19460d3 # v2.2.0
